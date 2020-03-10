@@ -170,8 +170,8 @@ ICAgICAgICA=
 znapzend_pkg="unRAID6-ZnapZend.0.19.0.x86_64.tgz"
 
 if ! [ -x "$(command -v perl)" ]; then
-  cho 'perl is not installed.... installing'
-  wget https://mirrors.slackware.com/slackware/slackware64-current/slackware64/d/$(wget -O- https://mirrors.slackware.com/slackware/slackware64-current/slackware64/d/ | egrep -o 'perl-.*x86_64-1.txz' | sort -V | head -1 | cut -d "\"" -f1) -O /tmp/perl.txz
+  echo 'perl is not installed.... installing'
+  wget https://mirrors.slackware.com/slackware/slackware64-current/slackware64/d/$(wget -O- https://mirrors.slackware.com/slackware/slackware64-current/slackware64/d/ | egrep -o 'perl-.*x86_64.*.txz' | sort -V | head -1 | cut -d "\"" -f1) -O /tmp/perl.txz
   installpkg /tmp/perl.txz 
   rm /tmp/perl.txz
 fi
