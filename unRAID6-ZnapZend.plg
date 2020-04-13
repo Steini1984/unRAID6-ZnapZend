@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "unRAID6-ZnapZend">
   <!ENTITY author    "Steini1984">
-  <!ENTITY version   "0.20.0">
+  <!ENTITY version   "0.20.0.1">
   <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unRAID6-ZnapZend/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -217,8 +217,8 @@ for x in /opt/znapzend-0.20.0/bin/*; do ln -s $x /usr/local/bin; done
 FILE=/boot/config/plugins/unRAID6-ZnapZend/auto_boot_on
 if [ -f "$FILE" ]; then
 
-  SERVICE="znapzend"
-  if pgrep -x "$SERVICE" >/dev/null
+  service="znapzend"
+  if (( $(ps -ef | grep -v grep | grep $service | wc -l) > 0 ))
     then
       echo "$SERVICE is running"
   else
