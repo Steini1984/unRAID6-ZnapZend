@@ -4,7 +4,7 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "unRAID6-ZnapZend">
   <!ENTITY author    "Steini1984">
-  <!ENTITY version   "0.19.1.2">
+  <!ENTITY version   "0.20.0">
   <!ENTITY repo      "https://raw.githubusercontent.com/&author;/unRAID6-ZnapZend/master">
   <!ENTITY pluginURL "&repo;/&name;.plg">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
@@ -19,8 +19,8 @@
 
 <CHANGES>
 
-###2020.03.10
-- Fix regex problem in Perl and make it possible to update when you have autostarting enabled
+###2020.04.13
+- update to 0.20.0
 
 ###2019.08.17
 - Initial version - 0.19.1
@@ -170,7 +170,7 @@ ICAgICAgICA=
 <FILE Run="/bin/bash">
 <INLINE>
 
-znapzend_pkg="unRAID6-ZnapZend.0.19.0.x86_64.tgz"
+znapzend_pkg="unRAID6-ZnapZend.0.20.0.x86_64.tgz"
 
 if ! [ -x "$(command -v perl)" ]; then
   echo 'perl is not installed.... installing'
@@ -211,7 +211,8 @@ download_install "${znapzend_pkg}"
 #fix for the icon
 chmod 755 /usr/local/emhttp/plugins/unRAID6-ZnapZend/
 
-for x in /opt/znapzend-0.19.0/bin/*; do ln -s $x /usr/local/bin; done
+rm /usr/local/bin/znapzend*
+for x in /opt/znapzend-0.20.0/bin/*; do ln -s $x /usr/local/bin; done
 
 FILE=/boot/config/plugins/unRAID6-ZnapZend/auto_boot_on
 if [ -f "$FILE" ]; then
@@ -219,7 +220,7 @@ if [ -f "$FILE" ]; then
   SERVICE="znapzend"
   if pgrep -x "$SERVICE" >/dev/null
     then
-      echo "$SERVICE is already running"
+      echo "$SERVICE is running"
   else
       echo "Starting daemon"
       znapzend --logto=/var/log/znapzend.log --daemonize
@@ -232,6 +233,8 @@ else
   echo ""
   echo ""
 fi
+
+
 
 </INLINE>
 </FILE>
